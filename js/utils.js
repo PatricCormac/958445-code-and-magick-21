@@ -49,5 +49,5 @@ window.utils = (() => {
       closeSetupButton.removeEventListener(`click`, window.utils.closeSetup);
       closeSetupButton.removeEventListener(`keydown`, window.utils.pressEnterHandler);
     },
-  }
+  };
 })();
