@@ -15,16 +15,6 @@ const renderCloud = (ctx, x, y, color) => {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-const getMaxElement = (arr) => {
-  let maxElement = arr[0];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] > maxElement) {
-      maxElement = arr[i];
-    }
-  }
-  return maxElement;
-};
-
 window.renderStatistics = (ctx, names, times) => {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.7)`);
   renderCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
@@ -41,7 +31,7 @@ window.renderStatistics = (ctx, names, times) => {
       CLOUD_Y + GAP + FONT_GAP + FONT_GAP
   );
 
-  const maxTime = getMaxElement(times);
+  const maxTime = window.utils.getMaxElement(times);
 
   for (let i = 0; i < names.length; i++) {
     const barRatio = barHeight * times[i] / maxTime;
