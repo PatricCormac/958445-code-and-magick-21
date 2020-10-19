@@ -1,11 +1,11 @@
 'use strict';
 
 (() => {
-  const FIRST_NAMES = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`,
+  /* const FIRST_NAMES = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`,
     `Юлия`, `Люпита`, `Вашингтон`];
 
   const LAST_NAMES = [`да Марья`, `Верон`, `Мирабелла`, `Вальц`, `Онопко`,
-    `Топольницкая`, `Нионго`, `Ирвинг`];
+    `Топольницкая`, `Нионго`, `Ирвинг`];*/
 
   const COAT_COLORS = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`,
     `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
@@ -13,6 +13,8 @@
   const EYE_COLORS = [`black`, `red`, `blue`, `yellow`, `green`];
 
   const FIREBALL_COLORS = [`#ee4830`, `#30a8ee`, `#5ce6c0`, `#e848d5`, `#e6e848`];
+
+  const MAX_SIMILAR_WIZARD_COUNT = 4;
 
   const setupBlock = document.querySelector(`.setup`);
   const templateBlock = document.querySelector(`#similar-wizard-template`)
@@ -29,7 +31,7 @@
   const hidenInputEyesColor = document.querySelector(`[name="eyes-color"]`);
   const hidenInputFireballColor = document.querySelector(`[name="fireball-color"]`);
 
-  const wizards = [
+  /* const wizards = [
     {
       name: `${window.utils.randomValue(FIRST_NAMES)} ${window.utils.randomValue(LAST_NAMES)}`,
       coatColor: `${window.utils.randomValue(COAT_COLORS)}`,
@@ -50,24 +52,34 @@
       coatColor: `${window.utils.randomValue(COAT_COLORS)}`,
       eyesColor: `${window.utils.randomValue(EYE_COLORS)}`
     },
-  ];
+  ];*/
 
   const renderWizard = (wizard) => {
     const wizardElement = templateBlock.cloneNode(true);
     wizardElement.querySelector(`.setup-similar-label`).textContent = wizard.name;
-    wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.coatColor;
-    wizardElement.querySelector(`.wizard-eyes`).style.fill = wizard.eyesColor;
+    wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.colorCoat;
+    wizardElement.querySelector(`.wizard-eyes`).style.fill = wizard.colorEyes;
 
     return wizardElement;
   };
 
-  const fragment = document.createDocumentFragment();
+  window.backend.load((wizards) => {
+    const fragment = document.createDocumentFragment();
 
-  wizards.forEach((wizard) => {
-    fragment.appendChild(renderWizard(wizard));
+    for (let i = 0; i < MAX_SIMILAR_WIZARD_COUNT; i++) {
+      fragment.appendChild(renderWizard(wizards[i]));
+    }
+
+    similarList.appendChild(fragment);
+  }, () => { });
+
+  const form = document.querySelector(`.setup-wizard-form`);
+  form.addEventListener(`submit`, (evt) => {
+    window.backend.save(new FormData(form), () => {
+      window.utils.closeSetup();
+    });
+    evt.preventDefault();
   });
-
-  similarList.appendChild(fragment);
 
   openSetupButton.addEventListener(`click`, window.utils.openSetup);
 
