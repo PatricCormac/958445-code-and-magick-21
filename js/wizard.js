@@ -7,8 +7,8 @@
   const EYE_COLORS = [`black`, `red`, `blue`, `yellow`, `green`];
 
   let wizard = {
-    onEyesChange: (color) => {},
-    onCoatChange: (color) => {},
+    onEyesChange: () => {},
+    onCoatChange: () => {},
   };
 
   const setupBlock = document.querySelector(`.setup-wizard`);
@@ -18,14 +18,14 @@
   const hidenInputEyesColor = document.querySelector(`[name="eyes-color"]`);
 
   wizardCoatElement.addEventListener(`click`, () => {
-    let newColor = window.utils.randomValue(COAT_COLORS)
+    let newColor = window.utils.randomValue(COAT_COLORS);
     hidenInputCoatColor.value = newColor;
     wizardCoatElement.style.fill = newColor;
     wizard.onCoatChange(newColor);
   });
 
   wizardEyesElement.addEventListener(`click`, () => {
-    let newColor = window.utils.randomValue(EYE_COLORS)
+    let newColor = window.utils.randomValue(EYE_COLORS);
     hidenInputEyesColor.value = newColor;
     wizardEyesElement.style.fill = newColor;
     wizard.onEyesChange(newColor);

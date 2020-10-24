@@ -1,4 +1,4 @@
-'use-strict';
+'use strict';
 
 (() => {
   const DEBOUNCE_INTERVAL = 500;
@@ -7,7 +7,7 @@
     let lastTimeout = null;
     return (...parameters) => {
       if (lastTimeout) {
-        window.clearTimeout(lastTimeout)
+        window.clearTimeout(lastTimeout);
       }
       lastTimeout = window.setTimeout(() => {
         cb(...parameters);

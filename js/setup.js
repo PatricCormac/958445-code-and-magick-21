@@ -16,8 +16,8 @@
   const hidenInputFireballColor = document.querySelector(`[name="fireball-color"]`);
 
   let wizards = [];
-  let coatColor = 'rgb(101, 137, 164)';
-  let eyesColor = 'black';
+  let coatColor = `rgb(101, 137, 164)`;
+  let eyesColor = `black`;
 
   /* const wizards = [
     {
@@ -87,7 +87,7 @@
     }
 
     return rank;
-  }
+  };
 
   const namesComparator = function (left, right) {
     if (left > right) {
@@ -97,7 +97,7 @@
     } else {
       return 0;
     }
-  }
+  };
 
   const updateWizards = function () {
     window.renderWizards(wizards.sort(function (left, right) {

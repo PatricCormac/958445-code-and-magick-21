@@ -18,7 +18,7 @@
       fragment.appendChild(wizardElement);
     }
 
-    similarList.innerHTML = '';
+    similarList.innerHTML = ``;
     similarList.appendChild(fragment);
   };
-})()
+})();
